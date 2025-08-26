@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Employees</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="/manager/dashboard">Dashboard</a>
+      <a href="/">Home</a>
+      <a href="/logout" style="float: right;">Logout</a>
+    </nav>
+  </header>
+  <h2>All Employees</h2>
+  <%#<a href="/manager/dashboard">⬅ Back to Dashboard</a>%>
+
+  <% if (employees.length === 0) { %>
+    <p>No employees found.</p>
+  <% } else { %>
+    <div class="employee-card">
+  <% employees.forEach(emp => { %>
+    <div class="card">
+      <p><strong>Username:</strong> <%= emp.username %></p>
+      <p><strong>Email:</strong> <%= emp.email %></p>
+
+      <form action="/manager/remove-employee/<%= emp._id %>" method="POST" onsubmit="return confirm('Are you sure you want to remove this employee?');">
+        <button class="btn danger-btn">Remove</button>
+      </form>
+    </div>
+  <% }) %>
+</div>
+
+  <% } %>
+
+  <footer>
+    <p>© 2025 Invoice Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

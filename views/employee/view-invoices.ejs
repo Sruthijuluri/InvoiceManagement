@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Invoices</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/employee/dashboard">Dashboard</a>
+      
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <h2>My Invoices</h2>
+   
+  <% if (invoices.length === 0) { %>
+    <p>No invoices found.</p>
+  <% } else { %>
+    <div class="invoice-grid">
+     <% invoices.forEach(inv => { %>
+  <div class="card">
+    <p><strong><%= inv.title %></strong> - ₹<%= inv.totalAmount %></p>
+    <p>Status: <span class="badge <%= inv.status %>"><%= inv.status %></span></p>
+    <p>Date: <%= new Date(inv.date).toLocaleDateString() %></p>
+
+    <% const status = requestMap[inv._id] %>
+
+    <% if (status === 'approved') { %>
+      <a href="/employee/edit-invoice/<%= inv._id %>">
+        <button>Edit</button>
+      </a>
+    <% } else if (status === 'pending') { %>
+      <button disabled>Request Sent</button>
+    <% } else if (status === 'rejected') { %>
+      <button disabled>Rejected</button>
+    <% } else { %>
+      <form action="/employee/request-edit/<%= inv._id %>" method="POST">
+        <button>Request Edit</button>
+      </form>
+    <% } %>
+  </div>
+<% }) %>
+
+
+    </div>
+  <% } %>
+  <footer>
+    <p>© 2025 Invoice Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

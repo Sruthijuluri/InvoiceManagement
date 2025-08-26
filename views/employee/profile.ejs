@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Profile</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .profile-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      border-color: #aa9cce;
+      box-shadow: 0 0 5px rgba(161,140,209,0.5);
+    }
+
+    .profile-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #614385;
+    }
+
+    .profile-container label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #614385;
+    }
+
+    .profile-container input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .profile-container .readonly {
+      background-color: #f5f5f5;
+      color: #777;
+    }
+
+    
+
+  
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <div class="profile-container">
+    <h2>Your Profile</h2>
+    <form action="/employee/update-profile" method="POST">
+      <label>Username</label>
+      <input type="text" value="<%= user.username %>" class="readonly" readonly>
+
+      <label>Email</label>
+      <input type="email" value="<%= user.email %>" class="readonly" readonly>
+
+      <label>Role</label>
+      <input type="text" value="<%= user.role %>" class="readonly" readonly>
+
+      <label for="mobile">Mobile Number</label>
+      <input type="text" id="mobile" name="mobile" value="<%= user.mobile || '' %>" placeholder="Enter your mobile number">
+
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" value="<%= user.dob || '' %>">
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>© 2025 Invoice Management System. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

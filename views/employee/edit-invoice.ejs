@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Invoice</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/employee/dashboard">Dashboard</a>
+      <a href="/employee/view-invoices">My Invoices</a>
+      <a href="/employee/profile">Profile</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2 style="text-align:center;">Edit Invoice</h2>
+      <form action="/employee/edit-invoice/<%= invoice._id %>" method="POST" class="add-invoice-form">
+        <input type="text" class="form-control" name="title" value="<%= invoice.title %>" placeholder="Invoice Title" required />
+        <input type="date" class="form-control" name="date" value="<%= new Date(invoice.date).toISOString().substring(0, 10) %>" required />
+
+        <label>Status:</label>
+        <select name="status" class="form-control" required>
+          <option value="pending" <%= invoice.status === "pending" ? "selected" : "" %>>Pending</option>
+          <option value="paid" <%= invoice.status === "paid" ? "selected" : "" %>>Paid</option>
+        </select>
+
+        <h3 style="margin-top: 20px;">Invoice Items</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Quantity</th>
+              <th>Price per Unit</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="itemsBody">
+            <% invoice.items.forEach((item, idx) => { %>
+              <tr>
+                <td><input type="text" name="items[<%= idx %>][name]" class="form-control" value="<%= item.name %>" required /></td>
+                <td><input type="number" name="items[<%= idx %>][quantity]" class="form-control" value="<%= item.quantity %>" required /></td>
+                <td><input type="number" name="items[<%= idx %>][price]" class="form-control" value="<%= item.price %>" required /></td>
+                <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+
+        <div style="text-align:center; margin-top:20px;">
+          <button type="button" class="btn btn-primary" onclick="addItem()">Add Item</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let index = <%= invoice.items.length %>;
+
+    function addItem() {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><input type="text" name="items[\${index}][name]" class="form-control" required></td>
+        <td><input type="number" name="items[\${index}][quantity]" class="form-control" required></td>
+        <td><input type="number" name="items[\${index}][price]" class="form-control" required></td>
+        <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
+      `;
+      document.getElementById('itemsBody').appendChild(row);
+      index++;
+    }
+
+    function removeRow(button) {
+      button.parentElement.parentElement.remove();
+    }
+  </script>
+
+  <footer>
+    <p>© 2025 Invoice Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

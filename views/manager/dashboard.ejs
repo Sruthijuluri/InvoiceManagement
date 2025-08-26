@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manager Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+  
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+    <h2>Welcome, <%= user.username %> (Manager)</h2>
+
+    <div id="dashboard">
+      <a href="/manager/invoices-view"><button>View All Invoices</button></a>
+      <a href="/manager/employees-view"><button>View All Employees</button></a>
+      <a href="/manager/view-requests"><button>View Edit Requests</button></a>
+      <a href="/manager/add-employee"><button>Add Employee</button></a>
+      <a href="/manager/stats"><button>View Stats</button> </a>
+
+      <a href="/logout"><button>Logout</button></a></li>
+    </div>
+
+
+  <footer>
+    <p>© 2025 Invoice Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

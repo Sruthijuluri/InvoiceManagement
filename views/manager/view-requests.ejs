@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pending Edit Requests</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="/manager/dashboard">Dashboard</a>
+      <a href="/">Home</a>
+      <a href="/logout" style="float: right;">Logout</a>
+    </nav>
+  </header>
+
+  <h2>Pending Invoice Edit Requests</h2>
+
+
+  <% if (requests.length === 0) { %>
+    <p class="no-requests">No pending requests.</p>
+  <% } else { %>
+    <div class="request-card">
+    <% requests.forEach(req => { %>
+      <div class="card">
+        <p><strong>Invoice:</strong> <%= req.invoiceTitle %></p>
+        <p><strong>Employee:</strong> <%= req.employeeName %> (<%= req.employeeEmail %>)</p>
+
+        <div class="button-group">
+          <form action="/manager/requests/<%= req._id %>/approve" method="POST">
+            <button type="submit">Approve</button>
+          </form>
+
+          <form action="/manager/requests/<%= req._id %>/reject" method="POST">
+            <button type="submit">Reject</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+    </div>
+  <% } %>
+
+  <footer>
+    <p>© 2025 Invoice Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

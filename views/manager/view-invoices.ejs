@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Invoices</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="/manager/dashboard">Dashboard</a>
+      <a href="/">Home</a>
+      <a href="/logout" style="float: right;">Logout</a>
+    </nav>
+  </header>
+  <h2>All Invoices</h2>
+   
+  <% if (invoices.length === 0) { %>
+    <p>No invoices found.</p>
+  <% } else { %>
+    <div class="invoice-grid">
+    <% invoices.forEach(inv => { %>
+      <div class="card">
+        <p><strong>Title:</strong> <%= inv.title %></p>
+        <p><strong>Total:</strong> ₹<%= inv.totalAmount %></p>
+        <p><strong>Status:</strong> <%= inv.status %></p>
+        <p><strong>Date:</strong> <%= new Date(inv.date).toLocaleDateString() %></p>
+        <% if (inv.isPastEmployee) { %>
+  <p><strong>Submitted by:</strong> Past Employee</p>
+<% } else { %>
+  <p><strong>Submitted by:</strong> <%= inv.employeeId?.username || 'Past Employee' %> (<%= inv.employeeId?.email || '' %>)</p>
+<% } %>
+
+      </div>
+    <% }) %>
+    </div>
+  <% } %>
+
+  <footer>
+    <p>© 2025 Invoice Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

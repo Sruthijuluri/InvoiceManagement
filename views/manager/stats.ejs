@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manager Statistics</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .chart-container {
+      width: 300px;
+      height: 300px;
+      margin: 30px auto;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .double-chart {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/manager/dashboard">Dashboard</a>
+      <a href="/logout" style="float: right;">Logout</a>
+    </nav>
+  </header>
+
+  <h2 style="text-align:center;">Statistics Dashboard</h2>
+
+  <div class="double-chart">
+    <div class="chart-container">
+      <canvas id="statusChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="companyChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+  // Paid vs Pending Pie Chart
+  const statusCtx = document.getElementById('statusChart').getContext('2d');
+  new Chart(statusCtx, {
+    type: 'pie',
+    data: {
+      labels: ['Paid', 'Pending'],
+      datasets: [{
+        label: 'Invoice Status',
+        data: [<%= paidCount %>, <%= pendingCount %>],
+        backgroundColor: ['#4CAF50', '#F44336']
+      }]
+    }
+  });
+
+  // Company-wise Bar Chart based on total amount
+  const companyCtx = document.getElementById('companyChart').getContext('2d');
+  new Chart(companyCtx, {
+    type: 'bar',
+    data: {
+      labels: <%- JSON.stringify(companyBreakdown.map(c => c._id)) %>,
+      datasets: [{
+        label: 'Total Amount Spent',
+        data: <%- JSON.stringify(companyBreakdown.map(c => c.totalAmount)) %>,
+        backgroundColor: '#36A2EB',
+        borderColor: '#1e88e5',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: function(value) {
+              return '₹' + value;
+            }
+          }
+        }
+      }
+    }
+  });
+  </script>
+
+  <footer>
+    <p>© 2025 Invoice Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

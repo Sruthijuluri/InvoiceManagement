@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Invoice</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/employee/dashboard">Dashboard</a>
+      
+      <a href="/logout" style="float: right;">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2 style="text-align:center;">Add Invoice</h2>
+      <form action="/employee/invoices" method="POST" class="add-invoice-form">
+        <input type="text" class="form-control" name="title" placeholder="Invoice Title" required />
+        <input type="date" class="form-control" name="date" required />
+
+        <label>Status:</label>
+        <select name="status" class="form-control" required>
+          <option value="pending">Pending</option>
+          <option value="paid">Paid</option>
+        </select>
+
+        <h3 style="margin-top: 20px;">Invoice Items</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Quantity</th>
+              <th>Price per Unit</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="itemsBody">
+            <tr>
+              <td><input type="text" name="items[0][name]" class="form-control" required></td>
+              <td><input type="number" name="items[0][quantity]" class="form-control" required></td>
+              <td><input type="number" name="items[0][price]" class="form-control" required></td>
+              <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="text-align:center; margin-top:20px;">
+          <button type="button" class="btn btn-primary" onclick="addItem()">Add Item</button>
+          <button type="submit" class="btn btn-primary">Submit Invoice</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+
+  <script>
+    let index = 1;
+    function addItem() {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><input type="text" name="items[${index}][name]" class="form-control" required></td>
+        <td><input type="number" name="items[${index}][quantity]" class="form-control" required></td>
+        <td><input type="number" name="items[${index}][price]" class="form-control" required></td>
+        <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
+      `;
+      document.getElementById('itemsBody').appendChild(row);
+      index++;
+    }
+
+    function removeRow(button) {
+      button.parentElement.parentElement.remove();
+    }
+  </script>
+
+  <footer>
+    <p>© 2025 Invoice Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>
