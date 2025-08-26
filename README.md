@@ -54,11 +54,19 @@ It helps organizations streamline invoice handling with separate dashboards for 
 
 ---
 
-###✅ Future Enhancements
--Email notifications for invoice approval/rejection.
--Advanced reporting and analytics.
--Export invoices as PDF.
--Role-based access for admins.
+## 🔮 Future Enhancements
+
+- **Invoice Export**: Allow invoices to be downloaded/exported as PDF or Excel.  
+- **Email Notifications**: Notify employees when invoices are approved or rejected.  
+- **Advanced Reporting**: Add statistics and visual charts for managers (monthly spending, pending approvals, etc.).  
+- **Search & Filters**: Implement search and filter options for invoices (by date, status, employee).  
+- **Role-Based Access Control (RBAC)**: Add an Admin role for higher-level control (managing managers and system settings).  
+- **File Attachments**: Allow employees to attach receipts or supporting documents to invoices.  
+- **Mobile-Friendly UI**: Improve responsiveness for mobile and tablet users.  
+- **Audit Logs**: Maintain history of invoice actions (created, approved, rejected, modified).  
+- **Multi-Language Support**: Provide localization for global usage.  
+- **Third-Party Integration**: Integrate with accounting tools (e.g., QuickBooks, Zoho Books).
+
   
 
         
