@@ -28,18 +28,3 @@ It helps organizations streamline invoice handling with separate dashboards for 
 - **Database:** MongoDB (Mongoose ORM)  
 - **Authentication:** Express sessions / bcrypt for password hashing  
 
----
-
-## 📂 Project Structure
-invoice-management-app/
-│── server.js # Main entry point
-│── package.json
-│── config/ # DB and auth configs
-│── models/ # Mongoose schemas
-│── routes/ # Express routes
-│── controllers/ # Business logic
-│── views/ # EJS templates
-│ ├── employee/ # Employee dashboard pages
-│ ├── manager/ # Manager dashboard pages
-│ └── auth/ # Login / signup pages
-│── public/ # CSS, JS, static assets
