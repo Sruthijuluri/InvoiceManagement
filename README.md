@@ -52,8 +52,7 @@ It helps organizations streamline invoice handling with separate dashboards for 
 5.Open the app in your browser:
   http://localhost:3000
 
-✅ Future Enhancements
-
+###✅ Future Enhancements
 -Email notifications for invoice approval/rejection.
 -Advanced reporting and analytics.
 -Export invoices as PDF.
